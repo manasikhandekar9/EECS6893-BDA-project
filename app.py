@@ -42,12 +42,10 @@ st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-projec
 
 #df = sc.read.csv("file:///home/hduser/programs/airbnb-price-pred/airbnb.csv", header=True)
 #reading in the dataframe from GCS bucket
-uploaded_file = st.file_uploader("Choose a file")
-data = spark.read.csv("preprocessed_data.csv", header=True)
+#uploaded_file = st.file_uploader("Choose a file")
+#data = spark.read.csv("preprocessed_data.csv", header=True)
 
-st.dataframe(data = data.toPandas().head(10))
-st.text('Our target variable is churn and we are giving vectorized data to the model.')
-st.text('Below shown data are results of the model.')
+
 
 df = spark.read.format("csv").options(header="false", inferschema="true").load("preprocessed_data.csv")
 
@@ -69,6 +67,12 @@ df_ml = df.withColumnRenamed("churn", "label")
 #train, test, valid = df_parq.randomSplit([0.6, 0.2, 0.2])
 df_parq = spark.read.load("test_parquet_data")
 test = df_parq
+
+data = test
+
+st.dataframe(data = data.toPandas().head(10))
+st.text('Our target variable is churn and we are giving vectorized data to the model.')
+st.text('Below shown data are results of the model.')
 
 st.sidebar.title('MLlib Regression models')
 st.sidebar.subheader('Select your model')
