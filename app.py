@@ -80,11 +80,9 @@ def rf_model(train, test, valid):
     """    stringIndexerGender = StringIndexer(inputCol="gender", outputCol="genderIndex", handleInvalid = 'skip')
     stringIndexerLevel = StringIndexer(inputCol="last_level", outputCol="levelIndex", handleInvalid = 'skip')
     stringIndexerState = StringIndexer(inputCol="last_state", outputCol="stateIndex", handleInvalid = 'skip')
-
     encoder = OneHotEncoder(inputCols=["genderIndex", "levelIndex", "stateIndex"],
                                        outputCols=["genderVec", "levelVec", "stateVec"],
                                 handleInvalid = 'keep')
-
     features = ['genderVec', 'levelVec', 'stateVec', 'days_active', 'avg_songs', 'avg_events', 'thumbs_up', 'thumbs_down', 'addfriend']
     assembler = VectorAssembler(inputCols=features, outputCol="features")
     """
@@ -121,7 +119,7 @@ def trained_model(mllib_model, test):
                 results = pred_test[['prediction', 'label']]
                 return rf_test, results
             
-     if mllib_model == 'Logistic Regression':
+    if mllib_model == 'Logistic Regression':
                 trained_model = RandomForestClassificationModel.load("lr_model")
                 pred_test = trained_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
@@ -132,7 +130,7 @@ def trained_model(mllib_model, test):
                 results = pred_test[['prediction', 'label']]
                 return rf_test, results
             
-      if mllib_model == 'Gradient Boosted Tree':
+    if mllib_model == 'Gradient Boosted Tree':
                 trained_model = RandomForestClassificationModel.load("gbt_model")
                 pred_test = trained_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
@@ -143,7 +141,7 @@ def trained_model(mllib_model, test):
                 results = pred_test[['prediction', 'label']]
                 return rf_test, results
             
-       if mllib_model == 'Naive Bayes':
+    if mllib_model == 'Naive Bayes':
                 trained_model = RandomForestClassificationModel.load("nb_model")
                 pred_test = trained_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
@@ -199,4 +197,3 @@ def valid_test(model, valid):
 #col5.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_valid)}</p>', unsafe_allow_html=True)
 
 st.dataframe(data = results_data.toPandas().head(10))
-
