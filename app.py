@@ -110,8 +110,8 @@ def rf_model(train, test, valid):
 
 def trained_model(mllib_model, test):
     if mllib_model == 'Random Forest':
-                trained_model = RandomForestClassificationModel.load("model")
-                pred_test = trained_model.transform(test)
+                rf_model = RandomForestClassificationModel.load("model")
+                pred_test = rf_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
@@ -120,9 +120,9 @@ def trained_model(mllib_model, test):
                 results = pred_test[['prediction', 'label']]
                 return rf_test, results
             
-    if mllib_model == 'Logistic Regression':
-                trained_model = LogisticRegressionModel.load("lr_model")
-                pred_test = trained_model.transform(test)
+    elif mllib_model == 'Logistic Regression':
+                lr_model = LogisticRegressionModel.load("lr_model")
+                pred_test = lr_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
@@ -131,9 +131,9 @@ def trained_model(mllib_model, test):
                 results = pred_test[['prediction', 'label']]
                 return rf_test, results
             
-    if mllib_model == 'Gradient Boosted Tree':
-                trained_model = GBTClassificationModel.load("gbt_model")
-                pred_test = trained_model.transform(test)
+    elif mllib_model == 'Gradient Boosted Tree':
+                gbt_model = GBTClassificationModel.load("gbt_model")
+                pred_test = gbt_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
@@ -142,9 +142,9 @@ def trained_model(mllib_model, test):
                 results = pred_test[['prediction', 'label']]
                 return rf_test, results
             
-    if mllib_model == 'Naive Bayes':
-                trained_model = NaiveBayesModel.load("nb_model")
-                pred_test = trained_model.transform(test)
+    elif mllib_model == 'Naive Bayes':
+                nb_model = NaiveBayesModel.load("nb_model")
+                pred_test = nb_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
