@@ -43,7 +43,7 @@ st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-projec
 #df = sc.read.csv("file:///home/hduser/programs/airbnb-price-pred/airbnb.csv", header=True)
 #reading in the dataframe from GCS bucket
 uploaded_file = st.file_uploader("Choose a file")
-data = spark.read.csv(uploaded_file, header=True)
+data = spark.read.csv("preprocessed_data.csv", header=True)
 
 st.dataframe(data = data.toPandas().head(10))
 st.text('Our target variable is churn and we are giving vectorized data to the model.')
@@ -67,6 +67,14 @@ df = df.withColumnRenamed("_c0", "userId")\
 df_ml = df.withColumnRenamed("churn", "label")
 df_parq = spark.read.load("parquet_data")
 train, test, valid = df_parq.randomSplit([0.6, 0.2, 0.2])
+
+
+st.sidebar.title('MLlib Regression models')
+st.sidebar.subheader('Select your model')
+mllib_model = st.sidebar.selectbox("Regression Models", \
+        ('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree', \
+            'Naive Bayes'))
+
 
 def rf_model(train, test, valid):
     """    stringIndexerGender = StringIndexer(inputCol="gender", outputCol="genderIndex", handleInvalid = 'skip')
@@ -101,17 +109,18 @@ def rf_model(train, test, valid):
     
     return rf_train, rf_test, model
 
-def trained_model(test):
-    trained_model = RandomForestClassificationModel.load("model")
-    pred_test = trained_model.transform(test)
-    predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
-    # Instantiate metrics object
-    #metrics_test = MulticlassMetrics(predictionAndLabels_test)
-    #rf_test = metrics_test.weightedFMeasure()
-    rf_test = 0.89
-    results = pred_test[['prediction', 'label']]
-
-    return rf_test, results
+def trained_model(mllib_model, test):
+    if mllib_model == 'Random Forest':
+                trained_model = RandomForestClassificationModel.load("model")
+                pred_test = trained_model.transform(test)
+                predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
+                # Instantiate metrics object
+                #metrics_test = MulticlassMetrics(predictionAndLabels_test)
+                #rf_test = metrics_test.weightedFMeasure()
+                rf_test = 0.89
+                results = pred_test[['prediction', 'label']]
+                return rf_test, results
+    
 
 
 col3, col4, col5= st.columns((1,1,1))
@@ -133,7 +142,7 @@ st.markdown("""
 
 
 
-metrics_test, results_data = trained_model(test)
+metrics_test, results_data = trained_model(mllib_model, test)
 
 #print("Weighted F1 score on test data is = %s" % metrics.weightedFMeasure())
 
