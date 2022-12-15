@@ -34,7 +34,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.title('''Customer Retention Analysis for Music Streaming Services''')
-st.subheader('Machine Learning Regression model comparison in MLlib.')
+st.subheader('Machine Learning Classification model comparison in MLlib.')
 st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-project)')
 
 
@@ -42,7 +42,8 @@ st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-projec
 
 #df = sc.read.csv("file:///home/hduser/programs/airbnb-price-pred/airbnb.csv", header=True)
 #reading in the dataframe from GCS bucket
-data = spark.read.csv("preprocessed_data.csv", header=True)
+uploaded_file = st.file_uploader("Choose a file")
+data = spark.read.csv(uploaded_file, header=True)
 
 st.dataframe(data = data.toPandas().head(10))
 st.text('Our target variable is churn and we are giving vectorized data to the model.')
