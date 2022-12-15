@@ -38,14 +38,19 @@ st.subheader('Machine Learning Classification model comparison in MLlib.')
 st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-project)')
 
 
+st.sidebar.title('MLlib Regression models')
+st.sidebar.subheader('Select your model')
+mllib_model = st.sidebar.selectbox("Models", \
+                                   ('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree','Naive Bayes'))
+
+
+
 #########   DATA
 
 #df = sc.read.csv("file:///home/hduser/programs/airbnb-price-pred/airbnb.csv", header=True)
 #reading in the dataframe from GCS bucket
-#uploaded_file = st.file_uploader("Choose a file")
-#data = spark.read.csv("preprocessed_data.csv", header=True)
-
-
+uploaded_file = st.file_uploader("Choose a file")
+df_csv = spark.read.csv("preprocessed_data.csv", header=True)
 
 df = spark.read.format("csv").options(header="false", inferschema="true").load("preprocessed_data.csv")
 
@@ -71,16 +76,6 @@ test = df_parq
 data = test
 data = data.withColumnRenamed("label", "churn")
 data = data.drop(*("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features"))
-
-st.dataframe(data = data.toPandas().head(10))
-st.text('Our target variable is churn and we are giving vectorized data to the model.')
-st.text('Below shown data are results of the model.')
-
-st.sidebar.title('MLlib Regression models')
-st.sidebar.subheader('Select your model')
-mllib_model = st.sidebar.selectbox("Models", \
-                                   ('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree','Naive Bayes'))
-
 
 def rf_model(train, test, valid):
     """    stringIndexerGender = StringIndexer(inputCol="gender", outputCol="genderIndex", handleInvalid = 'skip')
@@ -160,15 +155,7 @@ def trained_model(mllib_model, test):
     
 
 
-col3, col4, col5= st.columns((1,1,1))
-st.markdown("""
-<style>
-.big-font {
-    font-size:30px !important;
-    font-Weight: bold;
-}
-</style>
-""", unsafe_allow_html=True)
+
 
 #metrics_train, metrics_test, model = rf_model(train,test,valid)
 #print("Weighted F1 score on train data is = %s" % metrics.weightedFMeasure())
@@ -202,4 +189,17 @@ def valid_test(model, valid):
 #col5.header("F1 score Validation data")
 #col5.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_valid)}</p>', unsafe_allow_html=True)
 
-st.dataframe(data = results_data.toPandas().head(10))
+if uploaded_file is not None:
+    st.dataframe(data = data.toPandas().head(10))
+    st.text('Our target variable is churn and we are giving vectorized data to the model.')
+    st.text('Below shown data are results of the model.')
+    col3, col4, col5= st.columns((1,1,1))
+    st.markdown("""
+<style>
+.big-font {
+    font-size:30px !important;
+    font-Weight: bold;
+}
+</style>
+""", unsafe_allow_html=True)
+    st.dataframe(data = results_data.toPandas().head(10))
