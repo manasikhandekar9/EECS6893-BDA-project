@@ -72,8 +72,7 @@ test = df_parq
 
 st.sidebar.title('MLlib Regression models')
 st.sidebar.subheader('Select your model')
-mllib_model = st.sidebar.selectbox(
-        ('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree', \
+mllib_model = st.sidebar.selectbox(('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree', \
             'Naive Bayes'))
 
 
