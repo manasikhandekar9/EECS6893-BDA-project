@@ -111,7 +111,7 @@ def rf_model(train, test, valid):
 def trained_model(mllib_model, test):
     if mllib_model == 'Random Forest':
                 rf_model = RandomForestClassificationModel.load("model")
-                pred_test = rf_model.transform(test)
+                pred_test = rf_model.transform(test).cache()
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
@@ -122,7 +122,7 @@ def trained_model(mllib_model, test):
             
     elif mllib_model == 'Logistic Regression':
                 lr_model = LogisticRegressionModel.load("lr_model")
-                pred_test = lr_model.transform(test)
+                pred_test = lr_model.transform(test).cache()
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
@@ -133,7 +133,7 @@ def trained_model(mllib_model, test):
             
     elif mllib_model == 'Gradient Boosted Tree':
                 gbt_model = GBTClassificationModel.load("gbt_model")
-                pred_test = gbt_model.transform(test)
+                pred_test = gbt_model.transform(test).cache()
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
@@ -144,7 +144,7 @@ def trained_model(mllib_model, test):
             
     elif mllib_model == 'Naive Bayes':
                 nb_model = NaiveBayesModel.load("nb_model")
-                pred_test = nb_model.transform(test)
+                pred_test = nb_model.transform(test).cache()
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
