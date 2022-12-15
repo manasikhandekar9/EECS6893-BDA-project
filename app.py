@@ -69,7 +69,7 @@ df_parq = spark.read.load("test_parquet_data")
 test = df_parq
 
 data = test
-data = data.withColumnRenamed("label", "churn)
+data = data.withColumnRenamed("label", "churn")
 data.drop("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features")
 
 st.dataframe(data = data.toPandas().head(10))
