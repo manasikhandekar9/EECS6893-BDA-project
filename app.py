@@ -70,7 +70,7 @@ test = df_parq
 
 data = test
 data = data.withColumnRenamed("label", "churn")
-data.drop(*("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features"))
+data = data.drop(*("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features"))
 
 st.dataframe(data = data.toPandas().head(10))
 st.text('Our target variable is churn and we are giving vectorized data to the model.')
