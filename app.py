@@ -19,7 +19,7 @@ from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 from pyspark.mllib.evaluation import BinaryClassificationMetrics, MulticlassMetrics
 from pyspark.mllib.util import MLUtils
 from pyspark.ml.feature import Bucketizer
-from pyspark.ml.classification import RandomForestClassificationModel
+from pyspark.ml.classification import RandomForestClassificationModel, LogisticRegressionModel
 import streamlit as st
 
 spark = SparkSession.builder.appName('customer_retention') \
@@ -120,7 +120,7 @@ def trained_model(mllib_model, test):
                 return rf_test, results
             
     if mllib_model == 'Logistic Regression':
-                trained_model = RandomForestClassificationModel.load("lr_model")
+                trained_model = LogisticRegressionModel.load("lr_model")
                 pred_test = trained_model.transform(test)
                 predictionAndLabels_test = pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
