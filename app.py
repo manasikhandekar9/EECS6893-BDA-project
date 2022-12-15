@@ -33,11 +33,9 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-st.title('''Customer Retention Prediction''')
-st.subheader('Machine Learning Regression model comparison in MLlib. \
-    Dataset [link](https://www.kaggle.com/dgomonov/new-york-city-airbnb-open-data)')
-st.subheader('Built by [Manasi Khandekar](https://www.linkedin.com/in/manasikhandekar/) \
-    Github repo [here](https://github.com/manasikhandekar9/bda-project)')
+st.title('''Customer Retention Analysis for Music Streaming Services''')
+st.subheader('Machine Learning Regression model comparison in MLlib.')
+st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-project)')
 
 
 #########   DATA
@@ -129,7 +127,7 @@ st.markdown("""
 #print("Weighted F1 score on train data is = %s" % metrics.weightedFMeasure())
 
 
-col3.header("F1 score Train data")
+#col3.header("F1 score Train data")
 #col3.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_train)}</p>', unsafe_allow_html=True)
 
 
@@ -154,7 +152,7 @@ def valid_test(model, valid):
 
 #metrics_valid = valid_test(model, valid)
 
-col5.header("F1 score Validation data")
+#col5.header("F1 score Validation data")
 #col5.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_valid)}</p>', unsafe_allow_html=True)
 
 st.dataframe(data = results_data.toPandas().head(10))
