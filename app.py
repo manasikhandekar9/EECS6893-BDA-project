@@ -68,6 +68,7 @@ df_ml = df.withColumnRenamed("churn", "label")
 #df_parq = spark.read.load("parquet_data")
 #train, test, valid = df_parq.randomSplit([0.6, 0.2, 0.2])
 df_parq = spark.read.load("test_parquet_data")
+test = df_parq
 
 st.sidebar.title('MLlib Regression models')
 st.sidebar.subheader('Select your model')
