@@ -65,9 +65,9 @@ df = df.withColumnRenamed("_c0", "userId")\
 
 # Split data into train, validation and test sets
 df_ml = df.withColumnRenamed("churn", "label")
-df_parq = spark.read.load("parquet_data")
-train, test, valid = df_parq.randomSplit([0.6, 0.2, 0.2])
-
+#df_parq = spark.read.load("parquet_data")
+#train, test, valid = df_parq.randomSplit([0.6, 0.2, 0.2])
+df_parq = spark.read.load("test_parquet_data")
 
 st.sidebar.title('MLlib Regression models')
 st.sidebar.subheader('Select your model')
