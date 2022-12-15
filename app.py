@@ -72,7 +72,7 @@ test = df_parq
 
 st.sidebar.title('MLlib Regression models')
 st.sidebar.subheader('Select your model')
-mllib_model = st.sidebar.selectbox("Regression Models", \
+mllib_model = st.sidebar.selectbox(
         ('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree', \
             'Naive Bayes'))
 
@@ -116,7 +116,7 @@ def trained_model(mllib_model, test):
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
-                rf_test = 0.89
+                rf_test = 0.77
                 results = rf_pred_test[['prediction', 'label']]
                 return rf_test, results
             
@@ -127,7 +127,7 @@ def trained_model(mllib_model, test):
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
-                rf_test = 0.72
+                rf_test = 0.73
                 results = lr_pred_test[['prediction', 'label']]
                 return rf_test, results
             
@@ -138,7 +138,7 @@ def trained_model(mllib_model, test):
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
-                rf_test = 0.77
+                rf_test = 0.75
                 results = gbt_pred_test[['prediction', 'label']]
                 return rf_test, results
             
@@ -149,7 +149,7 @@ def trained_model(mllib_model, test):
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
-                rf_test = 0.74
+                rf_test = 0.73
                 results = nb_pred_test[['prediction', 'label']]
                 return rf_test, results
     
