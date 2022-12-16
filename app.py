@@ -97,8 +97,10 @@ def create_features(uploaded_file):
 
     normalizer = Normalizer(inputCol="rawFeatures", outputCol="features", p=1.0)
 
-    preprocessor = Pipeline(stages = stringIndexerGender + stringIndexerLevel + stringIndexerState + encoder + assembler + [normalizer]).fit(uploaded_file)
+    preprocessor = Pipeline(stages = indexers + encoder + assembler + [normalizer]).fit(uploaded_file)
     preprocessed_df = preprocessor.transform(uploaded_file)
+    preprocessed_df = preprocessed_df.withColumnRenamed("last_levelIndex", "levelIndex")\
+       .withColumnRenamed("last_stateIndex", "stateIndex")\
     
     return preprocessed_df
     
