@@ -40,14 +40,7 @@ st.title('''Customer Retention Analysis for Music Streaming Services''')
 st.subheader('Machine Learning Classification model comparison in MLlib.')
 st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-project)')
 
-
-st.sidebar.title('MLlib Regression models')
-st.sidebar.subheader('Select your model')
-mllib_model = st.sidebar.selectbox("Models", \
-                                   ('Random Forest', 'Logistic Regression', 'Gradient Boosted Tree','Naive Bayes'))
-
-
-
+mllib_model = 'Random Forest'
 #########   DATA
 
 #df = sc.read.csv("file:///home/hduser/programs/airbnb-price-pred/airbnb.csv", header=True)
@@ -235,6 +228,8 @@ if uploaded_file is not None:
             </style>
             """, unsafe_allow_html=True)
                 st.dataframe(data = results_data.toPandas().head(10))
+
+st.write("OR")
 st.write("Enter Attributes")
 uid = st.number_input("User Id")
 gender = st.radio("Gender", ('M', 'F'))
@@ -270,6 +265,7 @@ if st.button('Predict', key='2'):
                         "addfriend": [add_friend]
             }
             df = pd.DataFrame(data=d)
+            st.write(df.printSchema())
             st.dataframe(data = df.head(10))
             data = create_features(sqlContext.createDataFrame(df))
             data_ml = data.withColumnRenamed("churn", "label")
