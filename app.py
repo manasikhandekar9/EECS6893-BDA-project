@@ -220,6 +220,7 @@ if uploaded_file is not None:
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     if st.button('Predict', key='1'):
+                data = data.withColumnRenamed("churn", "label")
                 metrics_test, results_data = trained_model(mllib_model, data)
                 st.text('Below shown data are results of the model.')
                 col3, col4, col5= st.columns((1,1,1))
