@@ -234,7 +234,7 @@ if uploaded_file is not None:
                 st.dataframe(data = results_data.toPandas().head(10))
 st.write("Enter Attributes")
 uid = st.number_input("User Id")
-gender = st.radio("Gender", ('Male', 'Female'))
+gender = st.radio("Gender", ('M', 'F'))
 level = st.radio("Subscription Level", ('Free','Paid'))
 active_days = st.number_input("Acive days")
 state = st.text_input("Last State")
