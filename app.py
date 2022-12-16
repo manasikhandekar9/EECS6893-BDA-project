@@ -194,7 +194,6 @@ def trained_model(mllib_model, test):
 
 
 
-metrics_test, results_data = trained_model(mllib_model, test)
 
 #print("Weighted F1 score on test data is = %s" % metrics.weightedFMeasure())
 
@@ -221,6 +220,7 @@ if uploaded_file is not None:
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     if st.button('Predict', key='1'):
+                metrics_test, results_data = trained_model(mllib_model, data)
                 st.text('Below shown data are results of the model.')
                 col3, col4, col5= st.columns((1,1,1))
                 col4.header("F1 score Test data")
