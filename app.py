@@ -245,12 +245,13 @@ thumbsdown = st.number_input("Thumbs Down")
 add_friend = st.number_input("Add Friend")
 fields = [uid, gender, level,active_days, state, avg_songs, avg_events, thumbsup, thumbsdown, add_friend]
  
-with open('user.csv','a', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(fields)
-df = spark.read.format("csv").options(header="false", inferschema="true").load("user.csv")
-st.dataframe(data = df.toPandas().head(10))
-            
+
 if st.button('Predict', key='2'):
             st.write("The user is likely to churn")
+            with open('user.csv','a', newline='') as f:
+                        writer = csv.writer(f)
+                        writer.writerow(fields)
+            df = spark.read.format("csv").options(header="false", inferschema="true").load("user.csv")
+            st.dataframe(data = df.toPandas().head(10))
+            
             
