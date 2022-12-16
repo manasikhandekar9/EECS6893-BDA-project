@@ -240,7 +240,9 @@ uid = st.number_input("User Id")
 gender = st.radio("Gender", ('M', 'F'))
 level = st.radio("Subscription Level", ('Free','Paid'))
 active_days = st.number_input("Acive days")
-state = st.text_input("Last State")
+state = st.selectbox(
+    'Last State',
+    ('PA','TX', 'FL', 'WI', 'IL', 'NC', 'SC', 'AZ', 'CT', 'NH', 'OTHER'))
 avg_songs = st.number_input("Avg Songs")
 avg_events = st.number_input("Avg Events")
 thumbsup = st.number_input("Thumbs Up")
