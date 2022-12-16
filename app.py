@@ -227,17 +227,17 @@ if uploaded_file is not None:
             </style>
             """, unsafe_allow_html=True)
             st.dataframe(data = results_data.toPandas().head(10))
-
-    st.text_input("User Id")
-    st.radio("Gender", ('Male', 'Female'))
-    st.radio("Subscription Level", ('Free','Paid'))
-    st.text_input("Acive days")
-    st.text_input("Last State")
-    st.text_input("Avg Songs")
-    st.text_input("Avg Events")
-    st.text_input("Thumbs Up")
-    st.text_input("Thumbs Down")
-    st.text_input("Add Friend")
-    if st.button('Predict', key='2'):
-        st.write("The user is likely to churn")
+st.write("Enter Attributes")
+st.text_input("User Id")
+st.radio("Gender", ('Male', 'Female'))
+st.radio("Subscription Level", ('Free','Paid'))
+st.text_input("Acive days")
+st.text_input("Last State")
+st.text_input("Avg Songs")
+st.text_input("Avg Events")
+st.text_input("Thumbs Up")
+st.text_input("Thumbs Down")
+st.text_input("Add Friend")
+if st.button('Predict', key='2'):
+st.write("The user is likely to churn")
             
