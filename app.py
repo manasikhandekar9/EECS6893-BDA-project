@@ -95,7 +95,7 @@ def create_features(uploaded_file):
     normalizer = Normalizer(inputCol="rawFeatures", outputCol="features", p=1.0)
 
     preprocessor = Pipeline(stages = indexers + encoder + assembler + [normalizer]).fit(uploaded_file)
-    preprocessed_df = preprocessor.transform(uploaded_file)
+    preprocessed_df = preprocessor
     
     return preprocessed_df
     
@@ -211,6 +211,7 @@ def valid_test(model, valid):
 #col5.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_valid)}</p>', unsafe_allow_html=True)
 
 if uploaded_file is not None:
+    data = create_features(uploaded_file)
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     if st.button('Predict', key='1'):
