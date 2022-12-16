@@ -252,6 +252,20 @@ if st.button('Predict', key='2'):
                         writer = csv.writer(f)
                         writer.writerow(fields)
             df = spark.read.format("csv").options(header="false", inferschema="true").load("user.csv")
+            d = {
+                        "userId": [uid],
+                        "gender": [gender]
+                        "churn": "0"	
+                        "last_level": [level]	
+                        "days_active": [active_days]	
+                        "last_state": [state]	
+                        "avg_songs": [avg_songs]	
+                        "avg_events": [avg_events]	
+                        "thumbs_up": [thumbsup]	
+                        "thumbs_down": [thumbsdown]	
+                        "addfriend": [add_friend]
+            }
+            df = pd.DataFrame(data=d)
             st.dataframe(data = df.toPandas().head(10))
             
             
