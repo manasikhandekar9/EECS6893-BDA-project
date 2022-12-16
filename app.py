@@ -214,7 +214,7 @@ def valid_test(model, valid):
 
 if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
-    data = create_features(dataframe)
+    data = create_features(sqlContext.createDataFrame(dataframe))
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     if st.button('Predict', key='1'):
