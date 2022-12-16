@@ -272,6 +272,6 @@ if st.button('Predict', key='2'):
             st.dataframe(data = data_ml.toPandas().head(10))
             metrics_test, results_data = trained_model(mllib_model, data_ml)
             st.text(results_data)
-            #st.dataframe(data = results_data.toPandas().head(10))
+            st.dataframe(data = results_data.toPandas().head(1))
             st.write("The user is likely to churn")
             
