@@ -77,6 +77,29 @@ data = test
 data = data.withColumnRenamed("label", "churn")
 data = data.drop(*("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features"))
 
+def create_features(uploaded_file):
+    stringIndexerGender = StringIndexer(inputCol="gender", outputCol="genderIndex", handleInvalid = 'skip')
+    stringIndexerLevel = StringIndexer(inputCol="last_level", outputCol="levelIndex", handleInvalid = 'skip')
+    stringIndexerState = StringIndexer(inputCol="last_state", outputCol="stateIndex", handleInvalid = 'skip')
+    CategoricalFeatures = ['gender', 'last_level', 'last_state']
+    indexers = [StringIndexer(inputCol = col,
+    outputCol = "{}Index".format(col))\
+                          for col in CategoricalFeatures]
+    encoder = [OneHotEncoder(inputCols=["genderIndex", "last_levelIndex", "last_stateIndex"],
+                                       outputCols=["genderVec", "levelVec", "stateVec"],
+                                handleInvalid = 'keep')]
+
+    features = ['genderVec', 'levelVec', 'stateVec', 'days_active', 'avg_songs', 'avg_events', 'thumbs_up', 'thumbs_down', 'addfriend']
+    assembler = [VectorAssembler(inputCols=features, outputCol="rawFeatures")]
+
+    normalizer = Normalizer(inputCol="rawFeatures", outputCol="features", p=1.0)
+
+    preprocessor = Pipeline(stages = indexers + encoder + assembler + [normalizer]).fit(uploaded_file)
+    preprocessed_df = preprocessor.transform(uploaded_file)
+    
+    return preprocessed_df
+    
+
 def rf_model(train, test, valid):
     """    stringIndexerGender = StringIndexer(inputCol="gender", outputCol="genderIndex", handleInvalid = 'skip')
     stringIndexerLevel = StringIndexer(inputCol="last_level", outputCol="levelIndex", handleInvalid = 'skip')
@@ -190,6 +213,8 @@ def valid_test(model, valid):
 if uploaded_file is not None:
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
+    processed_df = create_features(uploaded_file)
+    st.dataframe(data = processed_df.toPandas().head(10))
     if st.button('Predict'):
                 st.text('Below shown data are results of the model.')
                 col3, col4, col5= st.columns((1,1,1))
