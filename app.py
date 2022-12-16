@@ -143,7 +143,7 @@ def trained_model(mllib_model, test):
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
                 rf_test = 0.77
-                results = rf_pred_test[['prediction', 'label']]
+                results = rf_pred_test
                 return rf_test, results
             
     elif mllib_model == 'Logistic Regression':
