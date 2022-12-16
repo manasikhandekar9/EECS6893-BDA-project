@@ -228,7 +228,7 @@ if uploaded_file is not None:
             """, unsafe_allow_html=True)
                 st.dataframe(data = results_data.toPandas().head(10))
 st.write("Enter Attributes")
-st.number_input("User Id")
+st.number_input("User Id",, min_value='0')
 st.radio("Gender", ('Male', 'Female'))
 st.radio("Subscription Level", ('Free','Paid'))
 st.number_input("Acive days", min_value='0')
