@@ -37,7 +37,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.title('''Customer Retention Analysis for Music Streaming Services''')
-st.subheader('Predict if the User is likely to churn')
+#st.subheader('Predict if the User is likely to churn')
 st.subheader( 'Github repo [here](https://github.com/manasikhandekar9/bda-project)')
 
 mllib_model = 'Random Forest'
