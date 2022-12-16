@@ -170,9 +170,7 @@ metrics_test, results_data = trained_model(mllib_model, test)
 
 #print("Weighted F1 score on test data is = %s" % metrics.weightedFMeasure())
 
-#
-col4.header("F1 score Test data")
-col4.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_test)}</p>', unsafe_allow_html=True)
+
 
 def valid_test(model, valid):
     model = model
@@ -194,6 +192,8 @@ if uploaded_file is not None:
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     st.text('Below shown data are results of the model.')
     col3, col4, col5= st.columns((1,1,1))
+    col4.header("F1 score Test data")
+    col4.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_test)}</p>', unsafe_allow_html=True)
     st.markdown("""
 <style>
 .big-font {
