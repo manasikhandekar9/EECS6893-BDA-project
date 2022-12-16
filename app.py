@@ -239,5 +239,5 @@ st.text_input("Thumbs Up")
 st.text_input("Thumbs Down")
 st.text_input("Add Friend")
 if st.button('Predict', key='2'):
-st.write("The user is likely to churn")
+            st.write("The user is likely to churn")
             
