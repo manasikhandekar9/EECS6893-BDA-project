@@ -25,6 +25,7 @@ import streamlit as st
 
 spark = SparkSession.builder.appName('customer_retention') \
             .getOrCreate()
+sqlContext = SQLContext(spark)
 
 
 st.set_page_config(layout="wide")
