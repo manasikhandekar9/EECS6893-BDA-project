@@ -216,9 +216,9 @@ if uploaded_file is not None:
                 data = data.withColumnRenamed("churn", "label")
                 metrics_test, results_data = trained_model(mllib_model, test)
                 #st.text('Below shown data are results of the model.')
-                col3, col4, col5= st.columns((1,1,1))
-                col4.header("F1 score Test data")
-                col4.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_test)}</p>', unsafe_allow_html=True)
+                #col3, col4, col5= st.columns((1,1,1))
+                #col4.header("F1 score Test data")
+                #col4.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_test)}</p>', unsafe_allow_html=True)
                 #st.markdown("""
             #<style>
             #.big-font {
