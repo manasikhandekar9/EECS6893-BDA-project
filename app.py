@@ -265,7 +265,7 @@ if st.button('Predict', key='2'):
                         "addfriend": [add_friend]
             }
             df = pd.DataFrame(data=d)
-            st.write(df.printSchema())
+            st.write(df.info())
             st.dataframe(data = df.head(10))
             data = create_features(sqlContext.createDataFrame(df))
             data_ml = data.withColumnRenamed("churn", "label")
