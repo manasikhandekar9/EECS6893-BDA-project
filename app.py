@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import re
 from pyspark.sql import SparkSession
+from pyspark.sql import SQLContext
 from pyspark.ml.feature import StringIndexer, VectorAssembler, Normalizer, StandardScaler, MinMaxScaler
 from pyspark.ml.feature import OneHotEncoder, StringIndexer
 from pyspark.sql.functions import udf
@@ -211,7 +212,7 @@ def valid_test(model, valid):
 #col5.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_valid)}</p>', unsafe_allow_html=True)
 
 if uploaded_file is not None:
-    data = create_features(uploaded_file)
+    data = create_features(sqlContext.createDataFrame(uploaded_file))
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     if st.button('Predict', key='1'):
