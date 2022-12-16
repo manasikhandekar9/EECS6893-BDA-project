@@ -269,5 +269,6 @@ if st.button('Predict', key='2'):
             st.dataframe(data = df.head(10))
             data = create_features(sqlContext.createDataFrame(df))
             st.dataframe(data = data.toPandas().head(10))
-            
+            metrics_test, results_data = trained_model(mllib_model, data)
+            st.dataframe(data = results_data.toPandas().head(10))
             
