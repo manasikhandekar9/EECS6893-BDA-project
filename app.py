@@ -234,7 +234,7 @@ st.write("Enter Attributes")
 uid = st.number_input("User Id")
 gender = st.radio("Gender", ('M', 'F'))
 level = st.radio("Subscription Level", ('Free','Paid'))
-active_days = st.number_input("Acive days")
+active_days = st.number_input("Active days")
 state = st.selectbox(
     'Last State',
     ('PA','TX', 'FL', 'WI', 'IL', 'NC', 'SC', 'AZ', 'CT', 'NH', 'OTHER'))
