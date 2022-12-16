@@ -49,7 +49,7 @@ mllib_model = st.sidebar.selectbox("Models", \
 
 #df = sc.read.csv("file:///home/hduser/programs/airbnb-price-pred/airbnb.csv", header=True)
 #reading in the dataframe from GCS bucket
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.file_uploader("Choose a file", type="csv")
 df_csv = spark.read.csv("preprocessed_data.csv", header=True)
 
 df = spark.read.format("csv").options(header="false", inferschema="true").load("preprocessed_data.csv")
