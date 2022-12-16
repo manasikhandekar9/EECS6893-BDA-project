@@ -268,7 +268,8 @@ if st.button('Predict', key='2'):
             df = pd.DataFrame(data=d)
             st.dataframe(data = df.head(10))
             data = create_features(sqlContext.createDataFrame(df))
-            st.dataframe(data = data.toPandas().head(10))
-            metrics_test, results_data = trained_model(mllib_model, data)
+            data_ml = data.withColumnRenamed("churn", "label")
+            st.dataframe(data = data_ml.toPandas().head(10))
+            metrics_test, results_data = trained_model(mllib_model, data_ml)
             st.dataframe(data = results_data.toPandas().head(10))
             
