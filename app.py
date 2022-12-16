@@ -77,7 +77,7 @@ test = df_parq
 
 data = test
 data = data.withColumnRenamed("label", "churn")
-#data = data.drop(*("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features"))
+data = data.drop(*("genderIndex", "last_levelIndex", "last_stateIndex", "genderVec", "levelVec", "stateVec", "rawFeatures", "features"))
 
 def create_features(uploaded_file):
     stringIndexerGender = StringIndexer(inputCol="gender", outputCol="genderIndex", handleInvalid = 'skip')
