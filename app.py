@@ -266,6 +266,6 @@ if st.button('Predict', key='2'):
                         "addfriend": [add_friend]
             }
             df = pd.DataFrame(data=d)
-            st.dataframe(data = df.toPandas().head(10))
+            st.dataframe(data = df.head(10))
             
             
