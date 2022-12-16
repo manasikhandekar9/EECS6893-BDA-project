@@ -267,5 +267,7 @@ if st.button('Predict', key='2'):
             }
             df = pd.DataFrame(data=d)
             st.dataframe(data = df.head(10))
+            data = create_features(df)
+            st.dataframe(data = data.toPandas().head(10))
             
             
