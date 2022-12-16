@@ -100,7 +100,7 @@ def create_features(uploaded_file):
     preprocessor = Pipeline(stages = indexers + encoder + assembler + [normalizer]).fit(uploaded_file)
     preprocessed_df = preprocessor.transform(uploaded_file)
     preprocessed_df = preprocessed_df.withColumnRenamed("last_levelIndex", "levelIndex")\
-       .withColumnRenamed("last_stateIndex", "stateIndex")\
+       .withColumnRenamed("last_stateIndex", "stateIndex")
     
     return preprocessed_df
     
