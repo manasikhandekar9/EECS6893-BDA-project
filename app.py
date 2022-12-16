@@ -254,15 +254,15 @@ if st.button('Predict', key='2'):
             df = spark.read.format("csv").options(header="false", inferschema="true").load("user.csv")
             d = {
                         "userId": [uid],
-                        "gender": [gender]
-                        "churn": "0"	
-                        "last_level": [level]	
-                        "days_active": [active_days]	
-                        "last_state": [state]	
-                        "avg_songs": [avg_songs]	
-                        "avg_events": [avg_events]	
-                        "thumbs_up": [thumbsup]	
-                        "thumbs_down": [thumbsdown]	
+                        "gender": [gender],
+                        "churn": "0",	
+                        "last_level": [level],	
+                        "days_active": [active_days],	
+                        "last_state": [state],	
+                        "avg_songs": [avg_songs],	
+                        "avg_events": [avg_events],	
+                        "thumbs_up": [thumbsup],	
+                        "thumbs_down": [thumbsdown],	
                         "addfriend": [add_friend]
             }
             df = pd.DataFrame(data=d)
