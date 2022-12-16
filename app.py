@@ -213,8 +213,6 @@ def valid_test(model, valid):
 if uploaded_file is not None:
     st.dataframe(data = data.toPandas().head(10))
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
-    processed_df = create_features(uploaded_file)
-    st.dataframe(data = processed_df.toPandas().head(10))
     if st.button('Predict'):
                 st.text('Below shown data are results of the model.')
                 col3, col4, col5= st.columns((1,1,1))
@@ -229,3 +227,4 @@ if uploaded_file is not None:
             </style>
             """, unsafe_allow_html=True)
                 st.dataframe(data = results_data.toPandas().head(10))
+            
