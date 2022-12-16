@@ -138,12 +138,12 @@ def trained_model(mllib_model, test):
     if mllib_model == 'Random Forest':
                 rf_model = RandomForestClassificationModel.load("model")
                 rf_pred_test = rf_model.transform(test).cache()
-                rf_predictionAndLabels_test = rf_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
+                #rf_predictionAndLabels_test = rf_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
                 rf_test = 0.77
-                results = rf_pred_test
+                results = rf_pred_test[['prediction', 'label']]
                 return rf_test, results
             
     elif mllib_model == 'Logistic Regression':
