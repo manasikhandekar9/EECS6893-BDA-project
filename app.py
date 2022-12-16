@@ -226,8 +226,8 @@ if uploaded_file is not None:
             }
             </style>
             """, unsafe_allow_html=True)
-    st.dataframe(data = results_data.toPandas().head(10))
-    st.dataframe(data = results_data.toPandas().head(10))
+            st.dataframe(data = results_data.toPandas().head(10))
+
     st.text_input("User Id")
     st.radio("Gender", ('Male', 'Female'))
     st.radio("Subscription Level", ('Free','Paid'))
