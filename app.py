@@ -97,7 +97,7 @@ def create_features(uploaded_file):
     normalizer = Normalizer(inputCol="rawFeatures", outputCol="features", p=1.0)
 
     preprocessor = Pipeline(stages = indexers + encoder + assembler + [normalizer]).fit(uploaded_file)
-    preprocessed_df = preprocessor
+    preprocessed_df = preprocessor.transform(uploaded_file)
     
     return preprocessed_df
     
