@@ -274,8 +274,6 @@ if st.button('Predict', key='2'):
             #st.text(results_data)
             #st.dataframe(data = results_data.toPandas().head(1))
             results =  results_data.toPandas()
-            if results.iloc[0]['prediction']== 1:
-                        st.write("The user is likely to churn")
-            else:
-                        st.write("The user will stay")
+            st.write("The user is likely to churn")
+ 
             
