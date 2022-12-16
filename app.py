@@ -219,14 +219,14 @@ if uploaded_file is not None:
                 col3, col4, col5= st.columns((1,1,1))
                 col4.header("F1 score Test data")
                 col4.markdown(f'<p class="big-font">{"{:.2f}".format(metrics_test)}</p>', unsafe_allow_html=True)
-                st.markdown("""
-            <style>
-            .big-font {
-                font-size:30px !important;
-                font-Weight: bold;
-            }
-            </style>
-            """, unsafe_allow_html=True)
+                #st.markdown("""
+            #<style>
+            #.big-font {
+                #font-size:30px !important;
+                #font-Weight: bold;
+            #}
+            #</style>
+            #""", unsafe_allow_html=True)
                 #st.dataframe(data = results_data.toPandas().head(10))
                 st.write("The user is likely to churn")
 
