@@ -22,6 +22,7 @@ from pyspark.mllib.util import MLUtils
 from pyspark.ml.feature import Bucketizer
 from pyspark.ml.classification import RandomForestClassificationModel, LogisticRegressionModel, GBTClassificationModel, NaiveBayesModel
 import streamlit as st
+import csv
 
 spark = SparkSession.builder.appName('customer_retention') \
             .getOrCreate()
@@ -232,16 +233,24 @@ if uploaded_file is not None:
             """, unsafe_allow_html=True)
                 st.dataframe(data = results_data.toPandas().head(10))
 st.write("Enter Attributes")
-st.number_input("User Id")
-st.radio("Gender", ('Male', 'Female'))
-st.radio("Subscription Level", ('Free','Paid'))
-st.number_input("Acive days")
-st.text_input("Last State")
-st.number_input("Avg Songs")
-st.number_input("Avg Events")
-st.number_input("Thumbs Up")
-st.number_input("Thumbs Down")
-st.number_input("Add Friend")
+uid = st.number_input("User Id")
+gender = st.radio("Gender", ('Male', 'Female'))
+level = st.radio("Subscription Level", ('Free','Paid'))
+active_days = st.number_input("Acive days")
+state = st.text_input("Last State")
+avg_songs = st.number_input("Avg Songs")
+avg_events = st.number_input("Avg Events")
+thumbsup = st.number_input("Thumbs Up")
+thumbsdown = st.number_input("Thumbs Down")
+add_friend = st.number_input("Add Friend")
+fields = [uid, gender, level,active_days, state, avg_songs, avg_events, thumbsup, thumbsdown, add_friend]
+ 
+with open('user.csv','a', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(fields)
+df = spark.read.format("csv").options(header="false", inferschema="true").load("user.csv")
+st.dataframe(data = df.toPandas().head(10))
+            
 if st.button('Predict', key='2'):
             st.write("The user is likely to churn")
             
