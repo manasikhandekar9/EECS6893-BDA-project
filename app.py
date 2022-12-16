@@ -221,7 +221,7 @@ if uploaded_file is not None:
     st.text('Our target variable is churn and we are giving vectorized data to the model.')
     if st.button('Predict', key='1'):
                 data = data.withColumnRenamed("churn", "label")
-                metrics_test, results_data = trained_model(mllib_model, data)
+                metrics_test, results_data = trained_model(mllib_model, test)
                 st.text('Below shown data are results of the model.')
                 col3, col4, col5= st.columns((1,1,1))
                 col4.header("F1 score Test data")
@@ -250,7 +250,6 @@ fields = [uid, gender, level,active_days, state, avg_songs, avg_events, thumbsup
  
 
 if st.button('Predict', key='2'):
-            st.write("The user is likely to churn")
             with open('user.csv','a', newline='') as f:
                         writer = csv.writer(f)
                         writer.writerow(fields)
@@ -275,5 +274,6 @@ if st.button('Predict', key='2'):
             st.dataframe(data = data_ml.toPandas().head(10))
             metrics_test, results_data = trained_model(mllib_model, data_ml)
             st.text(metrics_test)
-            st.dataframe(data = results_data.toPandas().head(10))
+            #st.dataframe(data = results_data.toPandas().head(10))
+            st.write("The user is likely to churn")
             
