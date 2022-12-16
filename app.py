@@ -151,7 +151,7 @@ def trained_model(mllib_model, test):
     elif mllib_model == 'Logistic Regression':
                 lr_model = LogisticRegressionModel.load("lr_model")
                 lr_pred_test = lr_model.transform(test).cache()
-                lr_predictionAndLabels_test = lr_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
+                #lr_predictionAndLabels_test = lr_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
@@ -162,7 +162,7 @@ def trained_model(mllib_model, test):
     elif mllib_model == 'Gradient Boosted Tree':
                 gbt_model = GBTClassificationModel.load("gbt_model")
                 gbt_pred_test = gbt_model.transform(test).cache()
-                gbt_predictionAndLabels_test = gbt_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
+                #gbt_predictionAndLabels_test = gbt_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
@@ -173,7 +173,7 @@ def trained_model(mllib_model, test):
     elif mllib_model == 'Naive Bayes':
                 nb_model = NaiveBayesModel.load("nb_model")
                 nb_pred_test = nb_model.transform(test).cache()
-                nb_predictionAndLabels_test = nb_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
+                #nb_predictionAndLabels_test = nb_pred_test.rdd.map(lambda lp: (float(lp.prediction), float(lp.label)))
                 # Instantiate metrics object
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
