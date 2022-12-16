@@ -273,7 +273,7 @@ if st.button('Predict', key='2'):
             metrics_test, results_data = trained_model(mllib_model, data_ml)
             #st.text(results_data)
             #st.dataframe(data = results_data.toPandas().head(1))
-            if results_datailoc[0]['prediction']== 1:
+            if results_data.iloc[0]['prediction']== 1:
                         st.write("The user is likely to churn")
             else:
                         st.write("The user will stay")
