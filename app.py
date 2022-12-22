@@ -227,7 +227,7 @@ if uploaded_file is not None:
             #}
             #</style>
             #""", unsafe_allow_html=True)
-                #st.dataframe(data = results_data.toPandas().head(10))
+                st.dataframe(data = results_data.toPandas().head(10))
                 st.write("The user is likely to churn")
 
 st.write("OR")
@@ -272,8 +272,8 @@ if st.button('Predict', key='2'):
             data_ml = data.withColumnRenamed("churn", "label")
             #st.dataframe(data = data_ml.toPandas().head(10))
             metrics_test, results_data = trained_model(mllib_model, data_ml)
-            st.text(results_data)
-            #st.dataframe(data = results_data.toPandas().head(1))
+            st.text("results:",results_data)
+            st.dataframe(data = results_data.toPandas().head(1))
             #results =  results_data.toPandas()
             st.write("The user is likely to churn")
  
