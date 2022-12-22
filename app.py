@@ -140,7 +140,7 @@ if st.button('Predict', key='2'):
             data_ml = data.withColumnRenamed("churn", "label")
             #st.dataframe(data = data_ml.toPandas().head(10))
             results_data = trained_model(data_ml)
-            st.text("results:",results_data)
+            #st.text("results:",results_data)
             #st.dataframe(data = results_data.toPandas().head(1))
             #results =  results_data.toPandas()
             if results_data == 1:
