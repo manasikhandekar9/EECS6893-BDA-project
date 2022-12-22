@@ -80,7 +80,7 @@ def trained_model(test):
                 if preds == 1:
                         results = 1
                 else:
-                        reuslts = 0
+                        results = 0
                 return results
             
 if uploaded_file is not None:
