@@ -76,7 +76,7 @@ def trained_model(test):
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
                 rf_test = 0.77
-                results = rf_pred_test[['prediction', 'label']]
+                results = rf_pred_test.select("prediction")
                 return results
             
 if uploaded_file is not None:
