@@ -76,7 +76,11 @@ def trained_model(test):
                 #metrics_test = MulticlassMetrics(predictionAndLabels_test)
                 #rf_test = metrics_test.weightedFMeasure()
                 rf_test = 0.77
-                results = rf_pred_test.select("prediction")
+                preds = rf_pred_test.select("prediction")
+                if preds == 1:
+                        results = 1
+                else:
+                        reuslts = 0
                 return results
             
 if uploaded_file is not None:
@@ -87,8 +91,12 @@ if uploaded_file is not None:
     if st.button('Predict', key='1'):
                 data = data.withColumnRenamed("churn", "label")
                 results_data = trained_model(data)
-                st.dataframe(data = results_data.toPandas().head(10))
-                st.write("The user is likely to churn")
+                #st.dataframe(data = results_data.toPandas().head(10))
+                if results_data == 1:
+                        st.write("The user is likely to churn")
+                else:
+                        st.write("The user is NOT likely to churn")
+                #st.write("The user is likely to churn")
 
 st.write("OR")
 st.write("Enter Attributes")
@@ -133,8 +141,12 @@ if st.button('Predict', key='2'):
             #st.dataframe(data = data_ml.toPandas().head(10))
             results_data = trained_model(data_ml)
             st.text("results:",results_data)
-            st.dataframe(data = results_data.toPandas().head(1))
+            #st.dataframe(data = results_data.toPandas().head(1))
             #results =  results_data.toPandas()
-            st.write("The user is likely to churn")
+            if results_data == 1:
+                        st.write("The user is likely to churn")
+            else:
+                        st.write("The user is NOT likely to churn")
+            #st.write("The user is likely to churn")
  
             
