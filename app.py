@@ -95,7 +95,7 @@ if uploaded_file is not None:
                 if results_data == 1:
                         st.write("The user is likely to churn")
                 else:
-                        st.write("The user is NOT likely to churn")
+                        st.write("The user is not likely to churn")
                 #st.write("The user is likely to churn")
 
 st.write("OR")
@@ -146,7 +146,7 @@ if st.button('Predict', key='2'):
             if results_data == 1:
                         st.write("The user is likely to churn")
             else:
-                        st.write("The user is NOT likely to churn")
+                        st.write("The user is not likely to churn")
             #st.write("The user is likely to churn")
  
             
